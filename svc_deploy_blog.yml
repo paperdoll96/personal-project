@@ -20,7 +20,7 @@ metadata:
   name: blog
   namespace: project
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: blog
