@@ -1,0 +1,41 @@
+---
+# svc-shop -> Cluster IP (Default)
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-shop # rule에 있는 svc-shop 과 같아야함 !  ! ! ! ! ! ! ! !
+spec:
+  selector:
+    app: shop
+  ports:
+  - port: 80
+    targetPort: 80
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: shop
+  template:
+    metadata:
+      labels:
+        app: shop
+    spec:
+      containers:
+      - name: shop
+        image: paperdoll96/portal:shop
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80
+
+# deploy-shop

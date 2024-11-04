@@ -1,0 +1,41 @@
+---
+# svc-blog -> Cluster IP (Default)
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-blog # rule에 있는 svc-blog 과 같아야함 !  ! ! ! ! ! ! ! !
+spec:
+  selector:
+    app: blog
+  ports:
+  - port: 80
+    targetPort: 80
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - name: blog
+        image: paperdoll96/portal:blog
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80
+
+# deploy-blog
