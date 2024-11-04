@@ -3,15 +3,15 @@
 apiVersion: v1
 kind: Namespace
 metadata: 
-  name: samsung
+  name: project
 
 ---
 # Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: samsung-deploy
-  namespace: samsung
+  name: project-deploy
+  namespace: project
   labels:
     app: web
     part: cloud
@@ -35,9 +35,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: samsung-lb
-  namespace: samsung
-spec: # spce -> spec으로 수정
+  name: project-lb
+  namespace: project
+spec:
   type: LoadBalancer
   selector:
     app: web
@@ -45,5 +45,4 @@ spec: # spce -> spec으로 수정
   - protocol: TCP
     port: 80           # LB 포트. 
     targetPort: 80
-    # NodePort : 랜덤이므로 따로 지정 필요 없음. 
-    # 여러 서비스가 노드포트를 공유하므로 겹치지 않도록 랜덤설정이 오히려 좋다.
+ 

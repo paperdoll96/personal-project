@@ -4,6 +4,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-shop # rule에 있는 svc-shop 과 같아야함 !  ! ! ! ! ! ! ! !
+  namespace: project
 spec:
   selector:
     app: shop
@@ -17,6 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shop
+  namespace: project
 spec:
   replicas: 3
   selector:

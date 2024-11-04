@@ -4,6 +4,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-etc
+  namespace: project
 spec:
   selector:
     app: etc
@@ -16,6 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: etc
+  namespace: project
 spec:
   replicas: 3
   selector:
